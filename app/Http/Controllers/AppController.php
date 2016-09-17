@@ -347,7 +347,7 @@ class AppController extends Controller
     public static function hs()
     {
       $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-      if(@fsockopen('www.twitter.com',80))
+      if(@fsockopen('www.google.com',80))
       {
         // create a new cURL resource
         $ch = curl_init();
