@@ -71,24 +71,6 @@ class Hftc
 		}
 		return array(0,null);	
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     #Math Combinatorics combination term
     public function combinationTerm($terms,$tweet_preprocessing,$minsupp)
     {

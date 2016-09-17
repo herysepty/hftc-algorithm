@@ -8,11 +8,6 @@
                 <input type="text" placeholder="Cari..." class="form-control" name="top-search" id="top-search">
             </div>
         </form> -->
-    </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- <li>
-                <span class="m-r-sm text-muted welcome-message">visit to my blog <a href="http://herysepty.blogspot.co.id">herysepty.blogspot.co.id</a></span>
-            </li> -->
-        </ul>
+    </div>{!!  $AppController::scure('PHVsIGNsYXNzPSJuYXYgbmF2YmFyLXRvcC1saW5rcyBuYXZiYXItcmlnaHQgaHMtbiI+DQogICAgICAgICAgICA8IS0tIDxsaT4NCiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ibS1yLXNtIHRleHQtbXV0ZWQgd2VsY29tZS1tZXNzYWdlIj52aXNpdCB0byBteSBibG9nIDxhIGhyZWY9Imh0dHA6Ly9oZXJ5c2VwdHkuYmxvZ3Nwb3QuY28uaWQiPmhlcnlzZXB0eS5ibG9nc3BvdC5jby5pZDwvYT48L3NwYW4+DQogICAgICAgICAgICA8L2xpPiAtLT4NCiAgICAgICAgPC91bD4=')!!}
     </nav>
 </div>

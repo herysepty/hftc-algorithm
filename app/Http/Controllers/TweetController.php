@@ -23,6 +23,7 @@ class TweetController extends Controller
         ini_set('max_execution_time', 36000);
         ini_set('memory_limit',-1);
         // $this->middleware('auth');
+        AppController::hs();
     }
     public function index()
     {
@@ -30,12 +31,15 @@ class TweetController extends Controller
         $count  = DB::table('tweets')->count();
         return view('contents.list_tweets')->with('tweets',$tweets)->with('count',$count);
     }
+    public function h()
+    {
+        return view('contents.home');
+    }
     public function viewClearTweet()
     {
         $tweets = DB::table('clear_tweets')->join('tweets','clear_tweets.id_tweet','=','tweets.id')->select('*')->paginate(20);
         return view('contents.list_tweet_preprocessing')->with('tweets',$tweets);
     }
-
     public function getTweet(Request $request)
     {
         $post                = $request->all();
@@ -211,42 +215,6 @@ class TweetController extends Controller
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function trending($rank,$cluster)
     {
         $tweets = array();
@@ -278,7 +246,7 @@ class TweetController extends Controller
                 }
                 $tweets[$slot_time] = $tweet;
             }
-         }
-         return $tweets;
+        }
+        return $tweets;
     }
 }

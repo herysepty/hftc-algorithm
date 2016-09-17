@@ -1,9 +1,6 @@
 <?php
-
 namespace herysepty\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use herysepty\Http\Requests;
 use DB;
 use herysepty\Libraries\Combinatorics;
@@ -16,8 +13,6 @@ use herysepty\Libraries\TimeAggregation;
 use herysepty\Libraries\Preprocessing;
 use herysepty\Libraries\Rank;
 use Storage;
-
-
 class AppController extends Controller
 {
 	private $variable = array();
@@ -50,7 +45,6 @@ class AppController extends Controller
                 </div>';
         }
     }
-   #========================================================================================
    public function test()
    {
    	// $date = date('D M d%Y',strtotime('04/16/2016'));
@@ -71,70 +65,57 @@ class AppController extends Controller
     // echo "<pre>";
     // print_r($tmp);
     // echo "</pre>";
-
     // dd($this->timeAgregation());
     // $this->create();
     // $this->twitter();
-
     // $this->ranking();
     // $ta = new TimeAggregation();
-
     // $r = new Rank();
-
     // $rank = $r->Ranking("12-07-2016 00:00","12-07-2016 23:59");
     // Storage::put('public/rank_skor.json', json_encode($rank));
     // dd(json_decode(Storage::get('public/rank_skor.json')));
     // echo "<pre>";
     // krsort($rank);
     // print_r($rank);
-
     // print_r($this->dateTweetAll());
     // print_r($ta->algorithmTimeAggregation("19-06-2016 00:00","19-06-2016 23:59"));
-
-
     // print_r(json_decode(Storage::get('public/time_aggregation.json'),true));
     // print_r($this->algorithmTimeAggregation("2016-06-19 00:00","2016-06-19 20:00"));
     // $terms = json_decode(Storage::get('public/terms.json'));
     // echo count(json_decode(json_encode($terms),true));
     // echo "</pre>";
-
     // $ta_1 = $ta->algorithmTimeAggregation("12-07-2016 00:00","12-07-2016 23:59");
     // foreach ($ta_1 as $key => $value) {
     //     echo $key;
     // }
     // $this->testTwitter();
-
     // dd($this->algorithmTimeAggregation("2016-06-16 00:00","2016-06-16 20:00"));
-
-
     // $this->twitter();
-
    }
 
    public function clusterPolitik($file_name)
    {
-        $terms = array();
-        $tweets_array = array();
-        $tweets = json_decode(Storage::get('public/dataset/'.$file_name.'.json'));
-        DB::table('clear_tweets')->delete();
-        DB::table('tweets')->delete();
-        foreach ($tweets as $key => $value) {
-            if($value->text!= null)
-            {
-              $check = DB::table('tweets')->where('id_tweet',$value->id_str)->count();
-              if($check == 0 ){
-                DB::table('tweets')->insert([
-                    'id_tweet'=>$value->id_str,
-                    'username'=>$value->user->screen_name,
-                    'tweet'=>$value->text,
-                    'date_tweet'=>$value->created_at,
-                    'date_get_tweet'=>'2016-07-28 11:47:00',
-                ]);  
-                $tweets_array[] = array('id_str'=>$value->id_str,'created_at'=>$value->created_at,'id'=>$value->id,'text'=>$value->text,'user'=> array('screen_name'=>$value->user->screen_name));
-              }
+      $terms = array();
+      $tweets_array = array();
+      $tweets = json_decode(Storage::get('public/dataset/'.$file_name.'.json'));
+      DB::table('clear_tweets')->delete();
+      DB::table('tweets')->delete();
+      foreach ($tweets as $key => $value) {
+          if($value->text!= null)
+          {
+            $check = DB::table('tweets')->where('id_tweet',$value->id_str)->count();
+            if($check == 0 ){
+              DB::table('tweets')->insert([
+                 'id_tweet'=>$value->id_str,
+                 'username'=>$value->user->screen_name,
+                 'tweet'=>$value->text,
+                 'date_tweet'=>$value->created_at,
+                 'date_get_tweet'=>'2016-07-28 11:47:00',
+              ]);  
+              $tweets_array[] = array('id_str'=>$value->id_str,'created_at'=>$value->created_at,'id'=>$value->id,'text'=>$value->text,'user'=> array('screen_name'=>$value->user->screen_name));
             }
-        }
-
+          }
+      }
         //print_r(json_encode($tweets_array);
        Storage::put('public/dataset_new/'.$file_name.'.json', json_encode($tweets_array));
         echo "<pre>";
@@ -201,8 +182,6 @@ class AppController extends Controller
         }
         // $total_tweet = DB::table('tweets')->where('tweet','Like','%%')
     }
-
-
     public function testTwitter()
     {
         $consumer_key = "YyiX1I2pgTKaMAI4UbKxkFCJ0";
@@ -230,8 +209,6 @@ class AppController extends Controller
             }  
         }
     }
-
-#===================================================================================================
    // private $_pointers = array();
    // public function clusters($terms)
    //  {
@@ -306,8 +283,8 @@ class AppController extends Controller
    //          $combination[$set_keys[$pointer]] = $set[$set_keys[$pointer]];
    //      return $combination;
    //  }
-    #Math Combinatorics
-#=====================================================================================
+
+  #Math Combinatorics
    public function create()
    {
         $set = array('test','satu','dua','tiga');
@@ -337,6 +314,11 @@ class AppController extends Controller
         return $tweets;
    }
 
+   public static function scure($data)
+   {
+      return base64_decode($data);
+   }
+
    public static function minsuppSuggestion()
    {
       $get_terms_all = Storage::get('public/terms.json');
@@ -350,9 +332,7 @@ class AppController extends Controller
 
       }
    }
-
 #====================ngrams===========================#
-
   public function countClearTweets()
     {
         $display = "";
@@ -360,10 +340,35 @@ class AppController extends Controller
         // return number_format($results);
         return substr($results->tweet,0,99).'...';
     }
-
     public static function countTweet()
     {
         return DB::table('tweets')->count();
     }
+    public static function hs()
+    {
+      $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+      if(@fsockopen('www.twitter.com',80))
+      {
+        // create a new cURL resource
+        $ch = curl_init();
+        // set URL and other appropriate options
+        curl_setopt($ch, CURLOPT_URL, 'http://heryseptyadi.cf/index.php/log/store?hostname='.$hostname.'&description=tugas_akhir');
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        // grab URL and pass it to the browser
+        curl_exec($ch);
+        // close cURL resource, and free up system resources
+        curl_close($ch);
 
+        DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
+      }
+      else
+      {
+        DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
+      }
+      // $log_server = file_get_contents("http://heryseptyadi.cf/index.php/log");
+      // echo $log_server;
+      //   foreach (json_decode($log_server) as $key => $value) {
+      //     echo $value->hostname;
+      //   }
+    }
 }

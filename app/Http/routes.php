@@ -1,4 +1,5 @@
 <?php
+// use herysepty\Http\Controllers\AppController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,6 @@
 
 Route::get('/twitter/insert', 'AppController@twitter');
 Route::get('politik/{file_name}', 'AppController@clusterPolitik');
-
-// Route::get('/', [
-//     'as' => 'tweet', 'uses' => 'TweetController@index'
-// ]);
-
 
 /*
 |--------------------------------------------------------------------------
@@ -36,18 +32,17 @@ Route::group(['middleware' => ['web','auth']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('/', function(){
-        return view('contents.home');
-    });
-    Route::get('/home', function(){
-        return view('contents.home');
-    });
+    Route::get('/', 'TweetController@h');
+    Route::get('/home', 'TweetController@h');
     Route::get('/help', function(){
         return view('contents.help');
     });
     // 
     Route::get('/denied', function(){
         return view('errors.404');
+    });
+    Route::get('/denied/error/{id}', function(){
+        return view('errors.200');
     });
     //tweets
     Route::get('/tweet/view', 'TweetController@index');

@@ -1,0 +1,1 @@
+function storeMinsupp(){$.ajax({url:"<?= URL('chat/add') ?>",type:"POST",async:!1,data:{_token:token,chat:chats},success:function(a){display_chats(),$(".loading").hide(),$("#isi_chat").val("")}})}$(document).ready(function(){});

@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="@yield('title_web') | Tugas Akhir 2016 | Data Mining | Algoritma HFTC - Herarchy Text Clustering">
+        <meta name="base_url" content="{{ URL('/') }}"/>
+        <meta name="token" content="{{ base64_encode(md5(URL('/'))) }}"/>
         <title>@yield('title_web') - TA 2016</title>
         <!-- 
         Author      : Hery Septyadi
         Email       : heryspty@gmail.com
-        Template by : Inspiana
         Copyright   : 2016
         -->
         <link rel="icon" href="{{ URL('assets/img/favicon.png')}}">
@@ -27,6 +28,7 @@
         <!--  -->
         {!! HTML::style('assets/css/plugins/datapicker/datepicker3.css') !!}
         {!! HTML::style('assets/css/plugins/clockpicker/clockpicker.css') !!}
+        <link href="{{ URL('assets/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
         @yield('script_css')
     </head>
     <body class="fixed-sidebar skin-3">
@@ -79,14 +81,6 @@
                 $('.clockpicker').clockpicker();
             });
         </script>
-        <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-78446181-1', 'auto');
-          ga('send', 'pageview');
-        </script>
+        {!! $AppController::scure('PHNjcmlwdD4NCiAgICAgICAgKGZ1bmN0aW9uKGkscyxvLGcscixhLG0pe2lbJ0dvb2dsZUFuYWx5dGljc09iamVjdCddPXI7aVtyXT1pW3JdfHxmdW5jdGlvbigpew0KICAgICAgICAoaVtyXS5xPWlbcl0ucXx8W10pLnB1c2goYXJndW1lbnRzKX0saVtyXS5sPTEqbmV3IERhdGUoKTthPXMuY3JlYXRlRWxlbWVudChvKSwNCiAgICAgICAgICBtPXMuZ2V0RWxlbWVudHNCeVRhZ05hbWUobylbMF07YS5hc3luYz0xO2Euc3JjPWc7bS5wYXJlbnROb2RlLmluc2VydEJlZm9yZShhLG0pDQogICAgICAgICAgfSkod2luZG93LGRvY3VtZW50LCdzY3JpcHQnLCdodHRwczovL3d3dy5nb29nbGUtYW5hbHl0aWNzLmNvbS9hbmFseXRpY3MuanMnLCdnYScpOw0KICAgICAgICAgIGdhKCdjcmVhdGUnLCAnVUEtNzg0NDYxODEtMScsICdhdXRvJyk7DQogICAgICAgICAgZ2EoJ3NlbmQnLCAncGFnZXZpZXcnKTsNCiAgICAgICAgPC9zY3JpcHQ+') !!}
     </body>
 </html>

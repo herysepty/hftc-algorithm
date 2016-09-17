@@ -1,3 +1,3 @@
 <div class="footer">
-	{!! $footer_desc !!}
+	<!-- {!! $footer_desc !!} -->
 </div>
