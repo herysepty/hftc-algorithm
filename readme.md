@@ -1,9 +1,8 @@
-# Aplikasi diteksi opini di media sosial Twitter
+# Aplikasi diteksi topik bencana alam pada media sosial Twitter (Data Mining)
 
 ## Installing
 
-Cara install
-Buka composer ketik pada komposer
+Buka composer ketik pada composer
 ```
 composer update
 ```
