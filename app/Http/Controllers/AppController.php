@@ -352,7 +352,7 @@ class AppController extends Controller
         // create a new cURL resource
         $ch = curl_init();
         // set URL and other appropriate options
-        curl_setopt($ch, CURLOPT_URL, 'http://heryseptyadi.cf/index.php/log/store?hostname='.$hostname.'&description=tugas_akhir');
+        curl_setopt($ch, CURLOPT_URL, 'http://www.heryseptyadi.com/index.php/log/store?hostname='.$hostname.'&description=tugas_akhir');
         curl_setopt($ch, CURLOPT_HEADER, false);
         // grab URL and pass it to the browser
         curl_exec($ch);
@@ -365,7 +365,7 @@ class AppController extends Controller
       {
         DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
       }
-      // $log_server = file_get_contents("http://heryseptyadi.cf/index.php/log");
+      // $log_server = file_get_contents("http://heryseptyadi.com/index.php/log");
       // echo $log_server;
       //   foreach (json_decode($log_server) as $key => $value) {
       //     echo $value->hostname;
