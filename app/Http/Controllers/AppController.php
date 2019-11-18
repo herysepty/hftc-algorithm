@@ -116,8 +116,8 @@ class AppController extends Controller
             }
           }
       }
-        //print_r(json_encode($tweets_array);
-       Storage::put('public/dataset_new/'.$file_name.'.json', json_encode($tweets_array));
+
+        Storage::put('public/dataset_new/'.$file_name.'.json', json_encode($tweets_array));
         echo "<pre>";
         print_r($tweets);
         echo "</pre>";
@@ -127,6 +127,7 @@ class AppController extends Controller
 
     public function twitter()
     {
+
         $consumer_key = "YyiX1I2pgTKaMAI4UbKxkFCJ0";
         $consumer_secret = "Kxw9IrUjFHz5IcVFhiBPUmjr1FxAvwSt3zveo2oPKqro1PMUni";
         $access_token = "715720484491399169-BRLVVh1oqYsy7Hq3bf1pRkWTfqCIHLc";
@@ -346,29 +347,29 @@ class AppController extends Controller
     }
     public static function hs()
     {
-      $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-      if(@fsockopen('www.google.com',80))
-      {
-        // create a new cURL resource
-        $ch = curl_init();
-        // set URL and other appropriate options
-        curl_setopt($ch, CURLOPT_URL, 'http://www.heryseptyadi.com/index.php/log/store?hostname='.$hostname.'&description=tugas_akhir');
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        // grab URL and pass it to the browser
-        curl_exec($ch);
-        // close cURL resource, and free up system resources
-        curl_close($ch);
+    //   $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+    //   if(@fsockopen('www.google.com',80))
+    //   {
+    //     // create a new cURL resource
+    //     $ch = curl_init();
+    //     // set URL and other appropriate options
+    //     curl_setopt($ch, CURLOPT_URL, 'http://www.heryseptyadi.com/index.php/log/store?hostname='.$hostname.'&description=tugas_akhir');
+    //     curl_setopt($ch, CURLOPT_HEADER, false);
+    //     // grab URL and pass it to the browser
+    //     curl_exec($ch);
+    //     // close cURL resource, and free up system resources
+    //     curl_close($ch);
 
-        DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
-      }
-      else
-      {
-        DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
-      }
-      // $log_server = file_get_contents("http://heryseptyadi.com/index.php/log");
-      // echo $log_server;
-      //   foreach (json_decode($log_server) as $key => $value) {
-      //     echo $value->hostname;
-      //   }
+    //     DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
+    //   }
+    //   else
+    //   {
+    //     DB::table('log_web')->insert(['hostname'=>$hostname,'date'=>date('Y-m-d H:i:s'),'ip_address'=>$_SERVER['REMOTE_ADDR'],'description'=>'tugas_akhir']);
+    //   }
+    //   // $log_server = file_get_contents("http://heryseptyadi.com/index.php/log");
+    //   // echo $log_server;
+    //   //   foreach (json_decode($log_server) as $key => $value) {
+    //   //     echo $value->hostname;
+    //   //   }
     }
 }

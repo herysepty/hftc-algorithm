@@ -42,14 +42,14 @@ class TweetController extends Controller
     }
     public function getTweet(Request $request)
     {
-        $post                = $request->all();
-        $date                = date('Y-m-d',strtotime($post['date']) + 86400);
+        $post = $request->all();
+        $date = date('Y-m-d',strtotime($post['date']) + 86400);
         
-        $consumer_key        = "YyiX1I2pgTKaMAI4UbKxkFCJ0";
-        $consumer_secret     = "Kxw9IrUjFHz5IcVFhiBPUmjr1FxAvwSt3zveo2oPKqro1PMUni";
-        $access_token        = "715720484491399169-BRLVVh1oqYsy7Hq3bf1pRkWTfqCIHLc";
-        $access_token_secret = "66q4RVaIq8NPHcc01mEaXXJXqPmLvqUfdtcbjuUvnBTHx";
-        $twitter             = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+        $consumer_key = config('global.CONSUMER_KEY');
+        $consumer_secret = config('global.CONSUMER_SECRET');
+        $access_token = config('global.ACCESS_TOKEN');
+        $access_token_secret = config('global.ACCESS_TOKEN_SECRET');
+        $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
         $twitter->setTimeouts(10, 360000);
 
         $keywords = array('bencana banjir','puting beliung','gempa bumi','gunung meletus','gelombang pasang','bencana kekeringan','bencana tsunami');
@@ -60,6 +60,7 @@ class TweetController extends Controller
             for ($i=0; $i < 999; $i++) 
             { 
                 $tweets = $twitter->get("search/tweets", ["q" => $value_keyword,"until"=>$date,"count"=>100,"max_id"=>$max_id,"result_type"=>"recent"]);
+
                 if(!empty($tweets->statuses))
                 {
                     foreach ($tweets->statuses as $tweet)
