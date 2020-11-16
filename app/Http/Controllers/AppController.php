@@ -128,10 +128,10 @@ class AppController extends Controller
     public function twitter()
     {
 
-        $consumer_key = "YyiX1I2pgTKaMAI4UbKxkFCJ0";
-        $consumer_secret = "Kxw9IrUjFHz5IcVFhiBPUmjr1FxAvwSt3zveo2oPKqro1PMUni";
-        $access_token = "715720484491399169-BRLVVh1oqYsy7Hq3bf1pRkWTfqCIHLc";
-        $access_token_secret = "66q4RVaIq8NPHcc01mEaXXJXqPmLvqUfdtcbjuUvnBTHx";
+        $consumer_key = "";
+        $consumer_secret = "";
+        $access_token = "";
+        $access_token_secret = "";
         $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
         // $twitter->setTimeouts(10, 360000);
         $h = 1;
@@ -185,10 +185,10 @@ class AppController extends Controller
     }
     public function testTwitter()
     {
-        $consumer_key = "YyiX1I2pgTKaMAI4UbKxkFCJ0";
-        $consumer_secret = "Kxw9IrUjFHz5IcVFhiBPUmjr1FxAvwSt3zveo2oPKqro1PMUni";
-        $access_token = "715720484491399169-BRLVVh1oqYsy7Hq3bf1pRkWTfqCIHLc";
-        $access_token_secret = "66q4RVaIq8NPHcc01mEaXXJXqPmLvqUfdtcbjuUvnBTHx";
+        $consumer_key = "";
+        $consumer_secret = "";
+        $access_token = "";
+        $access_token_secret = "";
         $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
         $twitter->setTimeouts(10, 360000);
         $h = 1;

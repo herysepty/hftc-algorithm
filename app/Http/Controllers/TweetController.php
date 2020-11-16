@@ -45,59 +45,44 @@ class TweetController extends Controller
         $post = $request->all();
         $date = date('Y-m-d',strtotime($post['date']) + 86400);
         
-        $consumer_key = config('global.CONSUMER_KEY');
-        $consumer_secret = config('global.CONSUMER_SECRET');
-        $access_token = config('global.ACCESS_TOKEN');
-        $access_token_secret = config('global.ACCESS_TOKEN_SECRET');
+        $consumer_key = env('TW_CONSUMER_KEY');
+        $consumer_secret = env('TW_CONSUMER_SECRET');
+        $access_token = env('TW_ACCESS_TOKEN');
+        $access_token_secret = env('TW_ACCESS_TOKEN_SECRET');
         $twitter = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
         $twitter->setTimeouts(10, 360000);
 
-        $keywords = array('bencana banjir','puting beliung','gempa bumi','gunung meletus','gelombang pasang','bencana kekeringan','bencana tsunami');
-        foreach ($keywords as $value_keyword)
-        {
+        $keywords = config('global.TW_KEYWORD');
+        
+        foreach ($keywords as $value_keyword) {
             $flag = 1;
             $max_id = 0;
-            for ($i=0; $i < 999; $i++) 
-            { 
-                $tweets = $twitter->get("search/tweets", ["q" => $value_keyword,"until"=>$date,"count"=>100,"max_id"=>$max_id,"result_type"=>"recent"]);
+            for ($i=0; $i < 999; $i++) { 
+                $tweets = $twitter->get("search/tweets", ["q" => $value_keyword,"until"=>$date,"count"=>100,"max_id"=>$max_id,"result_type"=>"recent", "lang" => "in", "locale" => "in"]);
 
-                if(!empty($tweets->statuses))
-                {
-                    foreach ($tweets->statuses as $tweet)
-                    {
-                        if(date('Y-m-d',strtotime($tweet->created_at)) == date('Y-m-d',strtotime($date)-86400))
-                        {
+                if(!empty($tweets->statuses)) {
+                    foreach ($tweets->statuses as $tweet) {
+                        if(date('Y-m-d',strtotime($tweet->created_at)) == date('Y-m-d',strtotime($date)-86400)) {
                             $max_id      = $tweet->id_str;
                             $check_tweet = DB::table('tweets')->where('id_tweet' , $tweet->id_str)->count();
-                            if($check_tweet == 0)
-                            {
+                            if($check_tweet == 0) {
                                 DB::table('tweets')->insert(['id_tweet' => $tweet->id_str,'username' => $tweet->user->screen_name,'tweet' => $tweet->text,'date_tweet' => $tweet->created_at,'date_get_tweet' => date("Y-m-d H:i:s")]);
                             }
                         }
-                        else
-                        {
-                            $flag = 0;
-                        }
+                        else $flag = 0;
                     }
-                }
-                else
-                {
-                    break;
-                }
-                if($flag == 0)
-                {
-                    break;
-                }
+                } else break;
+
+                if ($flag == 0) break;
             }
         }
+
         $total_tweet    = DB::table('tweets')->where('date_tweet','LIKE',date('D M d%Y',strtotime($date)-86400))->count();
-        if($total_tweet == 0)
-        {
+        
+        if($total_tweet == 0) {
             Session::flash('message',AppController::alertMessages('warning','Tidak ada tweet yang terunduh',''));
             return redirect('tweet/view');
-        }
-        else
-        {
+        } else {
             Session::flash('message',AppController::alertMessages('success','Tweet berhasil diunduh',''));
             return redirect('tweet/view');
         }
@@ -107,12 +92,10 @@ class TweetController extends Controller
         $hftc = new Hftc();
         $post = $request->all();
         $v = Validator::make($post,['minsupp' => 'required|numeric']);
-        if($v->fails())
-        {
+
+        if ($v->fails()) {
             return redirect()->back()->withErrors($v->errors())->withInput();
-        }
-        else
-        {
+        } else {
             $start_time = microtime(true);
             $h          = $hftc->clustering($post['minsupp']);
             $tweets     = array();
@@ -153,6 +136,7 @@ class TweetController extends Controller
                         ->with('trend',array_reverse($trend));
         }
     }
+
     public function processingTweets(Request $request)
     {
         $p = new Preprocessing();

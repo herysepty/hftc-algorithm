@@ -1,9 +1,10 @@
 <?php
-
+// hs create
 return [
-    'BASE_URL_API_TW' => 'https://',
-    'CONSUMER_KEY' => 'gZVR7n1RtRPhV2MGz2aUmmKnN',
-    'CONSUMER_SECRET' => '8AgzbOCIR0UcLWU0KG9MrIWXBIYV2lxNEicfupq3bknpoiY1Rt',
-    'ACCESS_TOKEN' => '232734727-QOMK8BjJgxRhCD8qtkn44hvzRb4bxZEGcTSdFByw',
-    'ACCESS_TOKEN_SECRET' => 'a24wsN9Uth8AYTU6ReOayF0Kn8akCUUSj4A6YMq1vXahR'
+    'BASE_URL_API_TW' => '',
+    'CONSUMER_KEY' => '',
+    'CONSUMER_SECRET' => '',
+    'ACCESS_TOKEN' => '',
+    'ACCESS_TOKEN_SECRET' => '',
+    'TW_KEYWORD' => ['covid','covid-19','corona','korona']
 ];
